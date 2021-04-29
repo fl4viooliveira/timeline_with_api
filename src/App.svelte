@@ -1,22 +1,19 @@
 <script>
-
+  import { histEvents } from './historyData';
+  import Event from './Event.svelte';
 </script>
 
 <main>
+
   <div class="timeline">
-    <div class="container left">
-      <div class="content">
-        <h2>2021</h2>
-        <p>Lorem ipsum..</p>
-      </div>
-    </div>
-    <div class="container right">
-      <div class="content">
-        <h2>2020</h2>
-        <p>Lorem, ipsum..</p>
-      </div>
-    </div>
+    {#each histEvents as {name, date}, i}
+      <Event {date} 
+        {name}
+        isLeft={i % 2 === 0} />
+    {/each}
+
   </div>
+
 </main>
 
 <style>
