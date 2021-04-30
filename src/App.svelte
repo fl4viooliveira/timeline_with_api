@@ -1,15 +1,32 @@
 <script>
+  import { onMount } from 'svelte';
   import { histEvents } from './historyData';
+  import { getData } from './holidaysAPI.js';
   import Event from './Event.svelte';
+
+  let events = [];
+  $: console.log(events);
+  
+  const convertDate = (date) => {
+    /* Time zone */
+    let timezone = 'PST'
+    let nd = new Date(`${date} ${timezone}`);
+
+    let prettyDate = nd.toLocaleDateString('en-EN', { day: 'numeric', month: 'long', year: 'numeric' });
+    return prettyDate;
+  }
+
+  onMount(async () => events = await getData());
 </script>
 
 <main>
 
   <div class="timeline">
-    {#each histEvents as {name, date}, i}
-      <Event {date} 
-        {name}
-        isLeft={i % 2 === 0} />
+    {#each events as {name, date}, i}
+      <Event {name}
+             date={convertDate(date)}
+             left={i % 2 === 0}
+             eventID={name} />
     {/each}
 
   </div>

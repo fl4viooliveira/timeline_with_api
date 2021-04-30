@@ -1,15 +1,16 @@
 <script>
-  export let date;
-  export let name;
-  export let isLeft = true;
+  export let name = "New Year's Day";
+  export let date = "Jan. 1, 2020";
+  export let left = true;
+  export let eventID;
 </script>
 
 <div class="container"
-    class:left={isLeft}
-    class:right={!isLeft}>
+    class:left class:right={!left}
+    id={eventID}>
   <div class="content">
     <h2>{date}</h2>
-    <p>{name}</p>
+    <h2>{name}</h2>
   </div>
 </div>
 
